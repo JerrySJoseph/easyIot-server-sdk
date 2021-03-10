@@ -1,0 +1,41 @@
+
+### Register New hub
+POST http://localhost:3000/api/v1/hub/register
+Content-Type: application/json
+
+{
+    "name":"JS HUb 3",
+    "password": 1615295343828
+}
+### Login to hub 6048c20ead043f1880f84fc0
+POST http://localhost:3000/api/v1/hub/login
+Content-Type: application/json
+
+{
+    "name":"JS HUb 3",
+    "password": 1615295343828
+}
+### UPDATE DEVICE
+PUT http://localhost:3000/api/v1/hub/update/6048becc877212168c9b3d38
+Content-Type: application/json
+
+{
+    "connStatus":"ONLINE"
+}
+
+### READ ALL DEVICE 
+GET http://localhost:3000/api/v1/hub/read
+Content-Type: application/json
+
+### READ SPECIFIC DEVICE by name
+GET http://localhost:3000/api/v1/hub/read/JS HUb 3
+Content-Type: application/json
+
+
+### DELETE DEVICE by ID
+DELETE   http://localhost:3000/api/v1/hub/delete
+Content-Type: application/json
+
+{
+    "_id":"6048bf09877212168c9b3d39"
+}

@@ -1,0 +1,39 @@
+
+### CREATE NEW DEVICE
+POST http://localhost:3000/api/v1/device/create
+Content-Type: application/json
+
+{
+    "name":"JS HOME Room1 Light3",
+    "createdAt": 1615295343828
+}
+
+### UPDATE DEVICE
+POST http://localhost:3000/api/v1/device/update/6047868c86f1d339c0a8f11f
+Content-Type: application/json
+
+{
+    "name":"JS HOME Room1 Light4",
+    "value":223
+}
+
+### READ ALL DEVICE 
+GET http://localhost:3000/api/v1/device/read
+Content-Type: application/json
+
+{
+    "_id":"604775f18d94502c6445d0e8"
+}
+
+### READ SPECIFIC DEVICE by name
+GET http://localhost:3000/api/v1/device/read/JS HOME Room1 Light4
+Content-Type: application/json
+
+
+### DELETE DEVICE by ID
+POST  http://localhost:3000/api/v1/device/delete
+Content-Type: application/json
+
+{
+    "_id":"604774bf8d94502c6445d0e7"
+}
