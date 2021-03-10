@@ -4,23 +4,27 @@ const profiledb=require('./db/device-database');
 const profileRouter=require('./routes/device-route');
 const hubRouter=require('./routes/hub-route');
 const iotEngine=require('./Iot-Engine');
-const CacheStore=require('./custom-cacheStore/CacheStore')
 
 //Assigning port 
 const REQ_PORT= process.env.PORT || 3000;
 const SOCKET_PORT= 3001;
 
-
-const apiVersion="v1";
-
 //Initialising express app
 const app=express();
+
+//enable json in request 
+app.use(express.json())
+
+var cors = require('cors')
+
+app.use(cors());
+
+const apiVersion="v1";
 
 iotEngine.initEngine(app,SOCKET_PORT)
 
 app.use(express.static(__dirname + '/public'));
-//enable json in request 
-app.use(express.json())
+
 
 //Registering all queues
 function registerRoutesAndStartListening()
