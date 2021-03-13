@@ -1,12 +1,11 @@
-const router=require('express').Router();
-const CreateHub=require('../data-access/hub/hub-create');
-const ReadHub=require('../data-access/hub/hub-read');
-const updateHUB=require('../data-access/hub/hub-update');
-const deleteHUB=require('../data-access/hub/hub-delete');
-const loginHUB=require('../data-access/hub/hub-login');
-
-const hubValidator=require('../helpers/hub-validator');
-const LoginHub = require('../data-access/hub/hub-login');
+const router=require('express').Router()
+const CreateHub=require('../data-access/hub/hub-create')
+const ReadHub=require('../data-access/hub/hub-read')
+const updateHUB=require('../data-access/hub/hub-update')
+const deleteHUB=require('../data-access/hub/hub-delete')
+const hubValidator=require('../helpers/hub-validator')
+const LoginHub = require('../data-access/hub/hub-login')
+const {isAuthorized}=require('../helpers/auth-validator')
 
 router.post('/register',hubValidator.createValidator,(req,res)=>{
     CreateHub(req.body)
@@ -42,5 +41,13 @@ router.delete('/delete',(req,res)=>{
     deleteHUB(req.body)
     .then((value)=>res.status(200).send(value))
     .catch((reason)=>res.status(400).send(reason))
+})
+
+router.post('/connect',isAuthorized,(req,res)=>{
+   res.status(200).send('connected');
+})
+
+router.post('/refresh-token',(req,res)=>{
+   res.status(200).send('connected');
 })
 module.exports=router;

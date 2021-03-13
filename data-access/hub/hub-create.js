@@ -1,18 +1,25 @@
 
 const HubModel=require('../../models/hub.model');
 const hubDB=require('mongoose').connection.collection('hub_data');
+const bcrypt=require('bcrypt');
 
 const CreateHub=(reqData)=>{
-    return new Promise((resolve,reject)=>{
+    return new Promise(async (resolve,reject)=>{
     
-  hubDB.findOne({name:reqData.name},(error,result)=>{
-      if(result)
-       reject({success:false,msg:"Hub with same name exists"});
-  })
-    const profile=parseDatafromRequestData(reqData)
-    hubDB.insertOne(profile)
-        .then((value)=>resolve(prepareResponseObject(true,value.ops[0])))
-        .catch((reason)=>reject(prepareResponseObject(false,reason)))
+    var hub=await hubDB.findOne({name:reqData.name})
+    if(hub)
+        {
+            reject(prepareResponseObject(false,"Hub with same name already exixts in the server"));
+            return;
+        }
+        else
+        {
+            const profile=await parseDatafromRequestData(reqData)
+            hubDB.insertOne(profile)
+                .then((value)=>resolve(prepareResponseObject(true,value.ops[0])))
+                .catch((reason)=>reject(prepareResponseObject(false,reason)))
+            
+        }
     })
 }
 const prepareResponseObject=(isSuccess,msg)=>
@@ -23,7 +30,11 @@ const prepareResponseObject=(isSuccess,msg)=>
     }
 }
  
-const parseDatafromRequestData=(reqData)=>{
+const parseDatafromRequestData=async (reqData)=>{
+    //hashing Pasword
+    const salt=await bcrypt.genSalt(10);
+    const hashedPassword=await bcrypt.hash(reqData.password,salt)
+   
     return HubModel(
         reqData.name,
         reqData.connStatus,
@@ -35,7 +46,7 @@ const parseDatafromRequestData=(reqData)=>{
         reqData.refToken,
         reqData.lastConnect,
         reqData.lastDisconnect,
-        reqData.password
+        hashedPassword
     )
 }
 module.exports=CreateHub;

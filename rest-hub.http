@@ -4,17 +4,29 @@ POST http://localhost:3000/api/v1/hub/register
 Content-Type: application/json
 
 {
-    "name":"JS HUb 3",
-    "password": 1615295343828
+    "name":"hub4",
+    "password": "hub4"
 }
+
 ### Login to hub 6048c20ead043f1880f84fc0
 POST http://localhost:3000/api/v1/hub/login
 Content-Type: application/json
 
 {
-    "name":"JS HUb 3",
-    "password": 1615295343828
+    "name":"hub3",
+    "password": "hub3"
 }
+
+### Connect
+POST http://localhost:3000/api/v1/hub/connect
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.1eyJpZCI6IjYwNGEyNDJjNTc2YmRiNDNlNGEyNzBiYSIsImlhdCI6MTYxNTQ4NDU5NiwiZXhwIjoxNjE1NDg0NjExLCJpc3MiOiJlYXN5LWlvdC1zZXJ2ZXIifQ.PxlIL0_fQMPaKRrMfBTyC-f45gpmAdaSjB12JEhcM8qKA
+Content-Type: application/json
+
+{
+    "name":"hub3",
+    "password": "hub3"
+}
+
 ### UPDATE DEVICE
 PUT http://localhost:3000/api/v1/hub/update/6048becc877212168c9b3d38
 Content-Type: application/json

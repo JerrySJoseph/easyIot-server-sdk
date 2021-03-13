@@ -5,6 +5,10 @@ const profileRouter=require('./routes/device-route');
 const hubRouter=require('./routes/hub-route');
 const iotEngine=require('./Iot-Engine');
 
+const dotenv=require('dotenv');
+
+dotenv.config();
+
 //Assigning port 
 const REQ_PORT= process.env.PORT || 3000;
 const SOCKET_PORT= 3001;
